@@ -1,147 +1,110 @@
-# Artificial Bee Colony Algorithm for the Traveling Salesman Problem (TSP)
+# ABC-TSP | Swarm Intelligence Route Optimizer
 
-This project demonstrates the **Artificial Bee Colony (ABC)** algorithm to solve the **Traveling Salesman Problem (TSP)**. It uses [Algorithm Visualizer](https://algorithm-visualizer.org/) to provide an interactive visualization of the algorithm in action.
+[![Live Demo](https://img.shields.io/badge/demo-live-10b981?style=for-the-badge)](https://abc-tsp.vercel.app)
+[![GitHub](https://img.shields.io/badge/source-github-1f2937?style=for-the-badge)](https://github.com/blamairia/abc-tsp)
 
-## Overview
+> 🐝 **Artificial Bee Colony algorithm for solving the Traveling Salesman Problem** — A premium, interactive visualization built with vanilla JavaScript and HTML5 Canvas.
 
-The Artificial Bee Colony algorithm simulates the foraging behavior of honey bees to find optimal solutions for complex optimization problems. Here, it is applied to the TSP, where the goal is to find the shortest possible route that visits each city exactly once and returns to the starting city.
-
----
-
-## Direct Link to Visualization
-
-Click the link below to directly open the visualization on Algorithm Visualizer:
-
-**[Artificial Bee Colony Algorithm Visualization](https://algorithm-visualizer.org/scratch-paper/1b11ef207c1d7d1448da7ce04ffc47cc)**
+![ABC-TSP Demo](https://raw.githubusercontent.com/blamairia/abc-tsp/main/docs/preview.png)
 
 ---
 
-## How to Use
+## ✨ Features
 
-1. **Open the Link**: Click on the direct link above.
-2. **Run the Visualization**: Click the "Run" button in the Algorithm Visualizer interface.
-3. **Observe the Process**:
-   - Watch the bees (paths) mutate over iterations.
-   - Observe the metrics like global best distance, average distance, and the number of unique paths.
-   - See how paths before and after mutation are highlighted, showing changes clearly.
+| Feature | Description |
+|---------|-------------|
+| 🎨 **TERMINUS Design** | Dark/light mode with emerald accents, scanlines, and glow effects |
+| 🐝 **Visual Bees** | Animated bees flying along paths, color-coded by role |
+| 📊 **Real-time Metrics** | Live iteration count, best distance, improvements |
+| ⚡ **Adjustable Parameters** | Speed control, city count slider |
+| 📱 **Responsive** | Works on desktop and mobile |
+| 🌓 **Theme Toggle** | System preference detection + localStorage |
 
 ---
 
+## 🧠 Algorithm Overview
 
+The **Artificial Bee Colony (ABC)** algorithm simulates honey bee foraging behavior:
 
-## Parameters
+| Bee Type | Role | Behavior |
+|----------|------|----------|
+| 🟡 **Forager** | Exploit | Refines its own path by swapping cities |
+| 🔵 **Onlooker** | Follow | Selects good paths probabilistically, then refines |
+| 🩷 **Scout** | Explore | Generates completely new random paths |
 
-You can modify the parameters in the code directly on Algorithm Visualizer to experiment with the behavior of the algorithm. Here are the parameters and their roles:
+### Workflow
+1. **Initialize** random paths for all bees
+2. **Forager phase**: Each forager mutates its path
+3. **Onlooker phase**: Onlookers select via roulette wheel, then mutate
+4. **Scout phase**: Scouts generate new random paths
+5. **Update** global best if improvement found
+6. **Repeat** for N iterations
 
-```javascript
-const nodes = [
-  [0, 15, 23], // Node ID, X-coordinate, Y-coordinate
-  [1, 34, 55],
-  [2, 78, 23],
-  [3, 45, 12],
-  [4, 89, 90],
-];
-const totalIterations = 10;    // Number of iterations to run the algorithm
-const NUM_FORAGERS = 2;        // Number of Forager bees
-const NUM_ONLOOKERS = 4;       // Number of Onlooker bees
-const NUM_SCOUTS = 4;          // Number of Scout bees
-const NUM_BEES = NUM_FORAGERS + NUM_ONLOOKERS + NUM_SCOUTS;
-const SCALE_FACTOR = 12;       // Scale factor for positioning nodes visually
+---
+
+## 🚀 Quick Start
+
+### Live Demo
+👉 **[abc-tsp.vercel.app](https://abc-tsp.vercel.app)**
+
+### Run Locally
+```bash
+# Clone the repo
+git clone https://github.com/blamairia/abc-tsp.git
+cd abc-tsp/static-demo
+
+# Serve with any HTTP server
+python3 -m http.server 8888
+# or
+npx serve .
 ```
 
-
-
-## Explanation of Parameters
-
-- **Nodes**: Defines the cities for the TSP with their coordinates. Each node is represented as `[ID, X, Y]`.
-- **totalIterations**: Controls the number of iterations the algorithm will run.
-- **NUM_FORAGERS, NUM_ONLOOKERS, NUM_SCOUTS**: Specify the number of bees for each role:
-  - **Foragers**: Refine their own paths.
-  - **Onlookers**: Select paths probabilistically based on fitness.
-  - **Scouts**: Generate new random paths to explore.
-- **SCALE_FACTOR**: Adjusts the spacing of nodes in the visualization for clarity.
+Open `http://localhost:8888` in your browser.
 
 ---
 
-## Algorithm Explanation
+## 🎛️ Controls
 
-### Bee Roles
-
-- **Forager Bees**:
-  - Focus on refining their own solutions (paths).
-  - Mutate their paths slightly (swap two cities).
-  - Adopt the new path if it improves the solution.
-
-- **Onlooker Bees**:
-  - Probabilistically select paths from foragers based on their fitness (shorter distances are better).
-  - Refine the selected paths.
-  - Adopt the improved path if beneficial.
-
-- **Scout Bees**:
-  - Explore completely new paths randomly.
-  - Prevent the algorithm from stagnating by introducing diversity.
+| Control | Description |
+|---------|-------------|
+| ▶️ **Start/Pause** | Run or pause the algorithm |
+| ↻ **Reset** | Generate new random cities |
+| 🔧 **Speed** | 1x - 5x iteration speed |
+| 📍 **Cities** | 5 - 15 cities to optimize |
+| 🌓 **Theme** | Toggle light/dark mode |
 
 ---
 
-### Algorithm Workflow
+## 📁 Project Structure
 
-1. **Initialization**:
-   - Nodes and edges are set up to define the TSP problem.
-   - Bees are initialized with random paths.
-
-2. **Waggle Dance Iterations**:
-   - **Forager Phase**: Each forager bee mutates its path and evaluates the new solution.
-   - **Onlooker Phase**: Onlookers probabilistically select paths to refine and improve.
-   - **Scout Phase**: Scouts generate new random paths.
-
-3. **Path Visualization**:
-   - Paths before and after mutation are displayed.
-   - Changes in paths are highlighted for clarity.
-   - Metrics like global best distance and average distance are updated.
-
-4. **Final Results**:
-   - The shortest path found is highlighted on the graph.
-   - Metrics like total unique paths explored and the best path distance are displayed.
+```
+abc-tsp/
+├── static-demo/
+│   ├── index.html      # Main HTML with TERMINUS layout
+│   ├── style.css       # CSS with dark/light theme support
+│   └── simulation.js   # ABC algorithm + Canvas rendering
+├── simulation.js       # Original algorithm-visualizer version
+└── README.md
+```
 
 ---
 
-## Metrics Displayed
+## 📖 References
 
-- **Global Best Distance**: The shortest path distance found across all iterations.
-- **Average Distance**: The average path distance across all bees in each iteration.
-- **Unique Paths**: The number of unique paths explored by the hive.
-
----
-
-## Customization
-
-### Steps to Customize Parameters
-
-1. Open the visualization link.
-2. Edit the parameter values at the top of the code. For example:
-   - Add or remove nodes in the `nodes` array.
-   - Increase or decrease `NUM_FORAGERS`, `NUM_ONLOOKERS`, or `NUM_SCOUTS`.
-   - Adjust `totalIterations` to change the duration of the algorithm.
-3. Run the visualization again to see how the changes affect the results.
+- [Artificial Bee Colony Algorithm](https://en.wikipedia.org/wiki/Artificial_bee_colony_algorithm)
+- [Traveling Salesman Problem](https://en.wikipedia.org/wiki/Travelling_salesman_problem)
 
 ---
 
-## Highlights of the Visualization
+## 👨‍💻 Author
 
-### Interactive Visualization:
-- Watch paths mutate over iterations.
-- Highlight differences between paths before and after mutation.
+Built by **[Billel Lamairia](https://blamairia.me)**
 
-### Real-Time Metrics:
-- Observe the improvement in global best distance.
-- Monitor how average distance and unique paths change over iterations.
-
-### Educational Insights:
-- Understand how the roles of foragers, onlookers, and scouts contribute to finding the optimal path.
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin)](https://www.linkedin.com/in/billel-lamairia-94141723b)
+[![Email](https://img.shields.io/badge/Email-EA4335?style=flat&logo=gmail&logoColor=white)](mailto:blamairia@gmail.com)
 
 ---
 
-## License
+## 📄 License
 
-This project is open-source. Feel free to modify and share it to explore the Artificial Bee Colony algorithm and its applications to optimization problems.
-
+MIT License — Feel free to use and modify!

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABC-TSP | Swarm Intelligence Route Optimizer</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="scanlines"></div>
+
+    <div class="container">
+        <header class="header">
+            <div class="title-block">
+                <span class="service-id">abc-tsp.algo</span>
+                <h1 class="title">ABC-TSP Optimizer</h1>
+                <p class="tagline">Swarm Intelligence Route Optimizer</p>
+            </div>
+            <div class="header-actions">
+                <div class="header-stat">
+                    <span class="stat-value" id="bestDistance">∞</span>
+                    <span class="stat-label">Best Distance</span>
+                </div>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <span class="theme-icon sun">☀️</span>
+                    <span class="theme-icon moon">🌙</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="canvas-container">
+                <canvas id="tspCanvas"></canvas>
+                <div class="canvas-overlay">
+                    <div class="iteration-badge">
+                        <span class="iteration-label">Iteration</span>
+                        <span class="iteration-value" id="iteration">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="sidebar">
+                <div class="panel controls-panel">
+                    <h3 class="panel-title">▸ CONTROLS</h3>
+                    <div class="control-group">
+                        <button class="btn btn-primary" id="startBtn">
+                            <span class="btn-icon">▶</span> START
+                        </button>
+                        <button class="btn btn-secondary" id="resetBtn">
+                            <span class="btn-icon">↻</span> RESET
+                        </button>
+                    </div>
+                    <div class="control-group">
+                        <label class="slider-label">
+                            <span>Speed</span>
+                            <span id="speedValue">1x</span>
+                        </label>
+                        <input type="range" id="speedSlider" min="1" max="5" value="2" class="slider">
+                    </div>
+                    <div class="control-group">
+                        <label class="slider-label">
+                            <span>Cities</span>
+                            <span id="citiesValue">8</span>
+                        </label>
+                        <input type="range" id="citiesSlider" min="5" max="15" value="8" class="slider">
+                    </div>
+                </div>
+
+                <div class="panel metrics-panel">
+                    <h3 class="panel-title">▸ METRICS</h3>
+                    <div class="metric">
+                        <span class="metric-label">Global Best</span>
+                        <span class="metric-value" id="globalBest">--</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Current Avg</span>
+                        <span class="metric-value" id="avgDistance">--</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Improvements</span>
+                        <span class="metric-value" id="improvements">0</span>
+                    </div>
+                </div>
+
+                <div class="panel legend-panel">
+                    <h3 class="panel-title">▸ BEE ROLES</h3>
+                    <div class="legend-item">
+                        <span class="legend-dot forager"></span>
+                        <span class="legend-text">Forager <span class="legend-count" id="foragerCount">2</span></span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-dot onlooker"></span>
+                        <span class="legend-text">Onlooker <span class="legend-count" id="onlookerCount">4</span></span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-dot scout"></span>
+                        <span class="legend-text">Scout <span class="legend-count" id="scoutCount">4</span></span>
+                    </div>
+                </div>
+            </aside>
+        </main>
+
+        <footer class="footer">
+            <p>Built by <a href="https://blamairia.me" target="_blank">Billel Lamairia</a> |
+                <a href="https://github.com/blamairia/abc-tsp" target="_blank">Source Code</a>
+            </p>
+        </footer>
+    </div>
+
+    <script src="simulation.js"></script>
+</body>
+
+</html>
